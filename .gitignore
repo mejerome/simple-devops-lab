@@ -3,7 +3,7 @@
 
 # Vagrant files
 *.vagrant
-
+*.vscode
 # Compiled Object files
 *.slo
 *.lo
