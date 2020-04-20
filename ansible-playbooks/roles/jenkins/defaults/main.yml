@@ -1,0 +1,41 @@
+---
+# defaults file for jenkins
+- hosts: jenkins
+  become: true
+
+  tasks:
+    - name: ensure a list of basic packages installed
+      yum:
+        name: "{{ packages }}"
+        state: latest
+      vars:
+        packages:
+        - wget
+        - git
+        - vim
+
+    - name: Ensure java dependencies are present
+      yum:
+        name: java
+        state: latest
+        update_cache: yes
+
+    - name: Add an environment variable to the remote user's shell.
+      lineinfile: "dest=~/.bash_profile regexp=^JAVA_HOME= \
+      line=JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.242.b08-0.el8_1.x86_64"
+
+    - name: Add jenkins repository
+      command: 
+        cmd: wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
+        creates: /etc/yum.repos.d/jenkins.repo
+
+    - name: Import jenkins key
+      rpm_key:
+        state: present
+        key: https://pkg.jenkins.io/redhat-stable/jenkins.io.key
+
+    - name: Start and enable jenkins service
+      service:
+        name: jenkins
+        state: started
+        enabled: yes
