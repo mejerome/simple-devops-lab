@@ -1,6 +1,9 @@
 # Prerequisites
 *.d
 
+# Vagrant files
+*.vagrant
+
 # Compiled Object files
 *.slo
 *.lo
