@@ -40,9 +40,11 @@ Tools already installed on workstation: Virtualbox, Vagrant and Git
     * Write playbook to install and configure Jenkins
     * Write playbook to install and configure Docker
 
+* Install Docker on ansible servers (this is necessary to test ansible container playbooks)
+    * sudo dnf install https://download.docker.com/linux/centos/7/x86_64/stable/Packages/containerd.io-1.2.6-3.3.el7.x86_64.rpm
+    * sudo dnf install docker-ce
+    * 
 
-Update Vagrantfile to deploy Docker server
-Install Docker
 Create Docker Image with Ansible
 Deploy Container on Docker
 

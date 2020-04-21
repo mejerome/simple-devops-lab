@@ -34,6 +34,11 @@
         state: present
         key: https://pkg.jenkins.io/redhat-stable/jenkins.io.key
 
+    - name: Ensure Jenkins package is installed
+      yum:
+        name: jenkins
+        state: present
+        
     - name: Start and enable jenkins service
       service:
         name: jenkins
