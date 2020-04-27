@@ -47,7 +47,9 @@ Tools already installed on workstation: Virtualbox, Vagrant and Git
 * Update Vagrantfile with docker-host
 * write playbook to install docker-ce
 * write playbook to deploy simple-devops-image
-* 
+* test website on tomcat
+* Entire CI/CD pipeline to docker works
+
 
 
 Create Docker Image with Ansible
