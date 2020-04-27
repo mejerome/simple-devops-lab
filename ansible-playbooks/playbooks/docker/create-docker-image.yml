@@ -1,0 +1,28 @@
+---
+- hosts: docker
+  become: true
+  
+  tasks:
+    - name: ensure dockerfile is present on docker-host
+      copy:
+        src: Dockerfile
+        dest: /opt/docker/Dockerfile
+
+    - name: stop if we have a docker container running
+      command: docker stop simple-devops-container
+      ignore_errors: yes
+
+    - name: remove stopped docker container
+      command: docker rm simple-devops-container
+      ignore_errors: yes
+
+    - name: remove current docker image
+      command: docker rmi simple-devops-image
+
+    - name: build tomcat docker image
+      command: "docker build -t simple-devops-image ."
+      args:
+        chdir: /opt/docker
+
+    - name: create a new container
+      command: docker run -d --name simple-devops-container -p 8080:8080 simple-devops-image

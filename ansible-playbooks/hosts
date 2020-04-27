@@ -2,9 +2,13 @@
 192.168.56.111
 
 [docker]
+192.168.56.113
 
+[multi]
+192.168.56.111
+192.168.56.113
 
-[jenkins:vars]
+[multi:vars]
 ansible_user=vagrant
 ansible_ssh_private_key_file=/home/ansadmin/insecure_private_key
 

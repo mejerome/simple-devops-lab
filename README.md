@@ -43,7 +43,12 @@ Tools already installed on workstation: Virtualbox, Vagrant and Git
 * Install Docker on ansible servers (this is necessary to test ansible container playbooks)
     * sudo dnf install https://download.docker.com/linux/centos/7/x86_64/stable/Packages/containerd.io-1.2.6-3.3.el7.x86_64.rpm
     * sudo dnf install docker-ce
-    * 
+
+* Update Vagrantfile with docker-host
+* write playbook to install docker-ce
+* write playbook to deploy simple-devops-image
+* 
+
 
 Create Docker Image with Ansible
 Deploy Container on Docker

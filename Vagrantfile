@@ -23,4 +23,9 @@ Vagrant.configure("2") do |config|
     ansible.vm.network "private_network", ip: "192.168.56.112"
   end
 
+  config.vm.define "docker-host" do |docker|
+    docker.vm.hostname = "docker-host.lab"
+    docker.vm.network "private_network", ip: "192.168.56.113"
+  end
+
 end

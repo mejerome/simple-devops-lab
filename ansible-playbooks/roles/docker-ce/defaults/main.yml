@@ -1,0 +1,79 @@
+---
+# defaults file for docker-ce
+- hosts: docker
+  become: true
+
+  vars:
+    docker_dir: /opt/docker
+
+  handlers:
+    - name: restart firewalld
+      service:
+        name: firewalld
+        state: restarted
+  
+    
+  tasks:
+    # Pre-Tasks
+    - name: update yum packages
+      yum:
+        update_cache: yes     
+
+    - name: ensure require packages are present
+      yum:
+        name:
+          - yum-utils
+          - device-mapper-persistent-data
+          - lvm2
+          - wget
+        state: present
+
+    - name: ensure port 8080 is open and listening
+      firewalld:
+        port: 8080/tcp
+        permanent: yes
+        state: enabled
+      notify: restart firewalld
+
+      
+    - name: ensure user ansadmin is present and part of docker group
+      user:
+        name: ansadmin
+        comment: ansible user for running plays
+        password: ansadmin
+        password_lock: no
+        group: docker
+        state: present
+
+    - name: ensure docker working directory is present
+      file:
+        path: "{{ docker_dir }}"
+        state: directory
+        owner: ansadmin
+
+# Install docker-ce
+    - name: ensure the set up of a stable docker repo
+      command: yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+      args:
+        creates: /etc/yum.repos.d/docker-ce.repo
+    
+    - name: fetch containerd file from source if not present
+      command:
+        cmd: wget https://download.docker.com/linux/centos/7/x86_64/stable/Packages/containerd.io-1.2.6-3.3.el7.x86_64.rpm /tmp/containerd.io-1.2.6-3.3.el7.x86_64.rpm
+        creates: /tmp/containerd.io-1.2.6-3.3.el7.x86_64.rpm
+
+    - name: install the containerd.io dependency is present
+      dnf:
+        name: /tmp/containerd.io-1.2.6-3.3.el7.x86_64.rpm
+        state: present
+
+    - name: ensure docker-ce is present
+      yum:
+        name: docker-ce
+        state: present
+
+    - name: start and enable docker service
+      service:
+        name: docker
+        state: started
+        enabled: yes
