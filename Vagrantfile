@@ -27,5 +27,4 @@ Vagrant.configure("2") do |config|
     docker.vm.hostname = "docker-host.lab"
     docker.vm.network "private_network", ip: "192.168.56.113"
   end
-
 end
