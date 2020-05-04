@@ -3,7 +3,7 @@ This is a simple devops lab that incorporates several devops tools to demonstrat
 
 # Work Plan
 Pre-requisite:
-Project OS: Ubuntu 19.10
+Project OS: Ubuntu 20.04 LTS
 IDE: VSCode
 Reference Guides:
 
@@ -49,8 +49,6 @@ Tools already installed on workstation: Virtualbox, Vagrant and Git
 * write playbook to deploy simple-devops-image
 * test website on tomcat
 * Entire CI/CD pipeline to docker works
-
-
 
 Create Docker Image with Ansible
 Deploy Container on Docker
