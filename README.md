@@ -49,7 +49,7 @@ Tools already installed on workstation: Virtualbox, Vagrant and Git
 * write playbook to deploy simple-devops-image
 * test website on tomcat
 * Entire CI/CD pipeline to docker works
-
+ocke
 Create Docker Image with Ansible
 Deploy Container on Docker
 
